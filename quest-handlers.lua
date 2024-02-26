@@ -17,14 +17,23 @@ end)
 
 Handlers.add("Claim-Quest", Handlers.utils.hasMatchingTag("Action", "Claim"),
   function (M) 
-    AddClaim(M.Quest, M.From)
-    print('Claim Added')
+    assert(type(M.Name) == 'string', 'Quest Name is required!')
+    if Utils.find(function (quest) return quest.Name == M.Name end, quests) and
+      not Utils.find(function (claim) return claim.Address == M.From end, Claims) then
+
+      AddClaim(M.Name, M.From)
+      print('Claim Added')
+      ao.send({Target = M.From, Data = "Claim received."})
+    else
+      print('quest not found')
+      ao.send({Target = M.From, Data = Colors.red .. "Claim not found or already claimed!" .. Colors.reset})
+    end
   end
 )
 
 Handlers.prepend("Claim-Quest-via-chat", function (M) 
   if M.Action == "Broadcasted" then
-    local pattern = "^/Quest:Claim:(%w+)"
+    local pattern = "^/Quests:Claim:(%w+)"
     local match = string.match(M.Data, pattern)
     if match then
       return "continue"
@@ -32,9 +41,16 @@ Handlers.prepend("Claim-Quest-via-chat", function (M)
   end
   return false
 end, function (M) 
-  local Quest = string.match(M.Data, "^/Quest:Claim:(%w+)")
-  AddClaim(Quest, M.Broadcaster, M.Nickname)
-  print('Claim Added')
+  local Quest = string.match(M.Data, "^/Quests:Claim:(%w+)")
+  if Utils.find(function (quest) return quest.Name == Quest end, quests) and
+    not Utils.find(function (claim) return claim.Address == M.Broadcaster end, Claims) then
+    AddClaim(Quest, M.Broadcaster, M.Nickname)
+    print('Claim Added')
+    ao.send({Target = M.From, Action = "Broadcast", Data = "Claim received."})
+  else 
+    print("Claim not found or already claimed!")
+    ao.send({Target = M.From, Action = "Broadcast", Data = Colors.red .. "Claim not found or already claimed!" .. Colors.reset })
+  end
 end
 )
 
