@@ -63,7 +63,7 @@ end
 function printlist(list)
     local output = ""
     -- Find all the keys from the first item for column headers
-    local headers = {"QuestId", "Name", "Points"}
+    local headers = {"QuestId", "Name", "CRED"}
 
     -- Calculate the width for each column
     local colWidths = {}
@@ -97,6 +97,7 @@ function printlist(list)
                 output = output ..
                              string.format("%-" .. colWidths[header] .. "s ",
                                            tostring(i))
+            
             else
                 output = output ..
                              string.format("%-" .. colWidths[header] .. "s ",
