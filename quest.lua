@@ -16,7 +16,7 @@ local json = require("json")
 -- the master table of quests
 quests = quests or {}
 
-requiredTags = {"Description", "Points", "Name"}
+requiredTags = {"Description", "CRED", "Name"}
 requiredTagsConclude = {"Name"}
 
 -- mandatory input Tags
@@ -51,7 +51,7 @@ function generateList()
             Url = quest.Tags.Url,
             Name = quest.Tags.Name,
             Description = quest.Tags.Description,
-            Points = quest.Tags.Points,
+            CRED = quest.Tags.CRED,
             Concluded = quest.Concluded
         })
     end
