@@ -149,7 +149,7 @@ end)
 Handlers.add("Details", Handlers.utils.hasMatchingTag("Action", "Detail"),
              function(msg)
     local item = quests[tonumber(msg.Index)]
-    local output = "Points: " .. item.Points .. "\n" .. "Name: " .. item.Name ..
+    local output = "CRED: " .. item.CRED .. "\n" .. "Name: " .. item.Name ..
                        "\n" .. "Description: " .. item.Description .. "\n" ..
                        "From: " .. item.From .. "\n" .. "Url" .. item.Url ..
                        "\n"
