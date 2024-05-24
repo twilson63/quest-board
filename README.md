@@ -34,3 +34,17 @@ Once completed, Join the "Quests" Chatroom in aos DevChat and share your victory
 Join("Quests", "Quests")
 Say("Hello", "Quests")
 ```
+
+## Quest Board 
+
+```
+ge3fE2WaLbPYAfRIf7fRMC_R4A2_V729Yws6U0kGBy4
+```
+
+
+## Quest Claim Process
+
+```
+wlPvnTCY5osNDItUB4hBST_t4c4J-xtGe5CwQiwauMM
+```
+
